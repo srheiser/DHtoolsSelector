@@ -1,0 +1,23 @@
+<!-- {% if select_user_story %}
+	<p>
+		user_story_id : {{select_user_story.id}}<br />
+		user_story_project : {{select_user_story.project}}<br />
+		user_story_text : {{select_user_story.story_text}}<br />
+		user_story_recommendation : {{select_user_story.recommendation}}<br />
+		user_story_parent : {{select_user_story.parent}}<br />
+{% else %}
+	<p> No user_story selected</p>
+{% endif %} -->
+{% load mptt_tags %}
+<ul>
+	{% recursetree nodes %}
+		<li>
+			{{node.story_text}}
+			{% if not node.is_leaf_node %}
+				<ul class="children">
+					{{children}}
+				</ul>
+			{% endif %}
+		</li>
+	{% endrecursetree %}
+</ul>

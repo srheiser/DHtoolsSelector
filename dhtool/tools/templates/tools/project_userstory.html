@@ -1,0 +1,39 @@
+<!-- {% if select_userstories %}
+	<ul>
+		{% for us in select_userstories %}
+			<li>user_story_text : {{us.story_text}}</li>
+		{% endfor %}
+	</ul>
+{% endif %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DHtool selector</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% load mptt_tags %}
+<!-- <script>
+	document.querySelector('input[type="checkvbox"]').checked = false
+</script> -->
+<form action="{% url 'result' %}">
+	{% recursetree select_userstories %}
+	
+		<div class="checkbox">
+			<label data-toggle="collapse" data-target="#{{node.id}}" aria-expanded="false"><input type="checkbox" name="story" value="{{node.id}}" autocomplete="off">{{node.story_text}}</label>
+		</div>
+			{% if not node.is_leaf_node %}
+				<ul class="collapse" id="{{node.id}}">
+					{{children}}	
+				</ul>
+			{% endif %}
+	
+	{% endrecursetree %}
+	<input type="submit" value="Show Result">
+</form>
+</body>
+</html>
