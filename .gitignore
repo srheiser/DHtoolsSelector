@@ -1,1 +1,2 @@
-dhtool/settings.py*
+*settings.py
+*.pyc
