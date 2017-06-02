@@ -25,6 +25,9 @@ class MappingTools(models.Model):
 #	parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
 	def __str__(self):
 		return self.software_name	
+	class Meta:
+		verbose_name_plural = "mapping tools"
+
 class UserStories(MPTTModel):
 #	id = models.AutoField(primary_key=True)
 #	title = models.CharField(max_length=50, unique=True)
@@ -35,6 +38,9 @@ class UserStories(MPTTModel):
 	parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
 	def __str__(self):
 		return self.story_text
+	class Meta:
+		verbose_name_plural = "user stories"
+
 #class Recommendations(MPTTModel):
 #	user_story_id = models.ForeignKey(UserStories)
 #	rec_id = models.ForeignKey(MappingTools)
