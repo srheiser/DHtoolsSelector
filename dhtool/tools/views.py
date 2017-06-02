@@ -8,21 +8,21 @@ from django.http import HttpResponse
 from .models import MappingTools
 from .models import UserStories
 from django.template import loader
-from .models import Project
+from .models import Inquiry
 # Create your views here.
 def index(request):
 	return HttpResponse("This is the view for dhtools.")
-def project(request):
-	template = loader.get_template('tools/project.html')
+def inquiry(request):
+	template = loader.get_template('tools/inquiry.html')
 	context = {
-		'project_all' : Project.objects.all(),
+		'inquiry_all' : Inquiry.objects.all(),
 	}
 	return HttpResponse(template.render(context, request))
 
-def project_userstory(request, id):
-	select_project = Project.objects.get(pk = id)
-	template = loader.get_template('tools/project_userstory.html')
-	select_userstories = UserStories.objects.filter(project_id = id)
+def inquiry_userstory(request, id):
+	select_inquiry = Inquiry.objects.get(pk = id)
+	template = loader.get_template('tools/inquiry_userstory.html')
+	select_userstories = UserStories.objects.filter(inquiry_id = id)
 	context = {
 		'select_userstories' : select_userstories,
 	}

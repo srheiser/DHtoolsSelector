@@ -3,13 +3,13 @@
 {% block content %}
 	{% include 'top-banner.html' %}
 	<link rel="stylesheet" type="text/css" href="{% static './base.css'%}" >
-	{% if project_all %}
+	{% if inquiry_all %}
 		<ul>
-		{% for project in project_all %}
-			<li><a href="{% url 'project_userstory' project.id %}">{{project.name}}</a></li>
+		{% for inquiry in inquiry_all %}
+			<li><a href="{% url 'inquiry_userstory' inquiry.id %}">{{inquiry.name}}</a></li>
 		{% endfor %}
 		</ul>
 	{% else %}
-		<p>No project are available.</p>
+		<p>No inquiries are available.</p>
 	{% endif %}
 {% endblock content %}

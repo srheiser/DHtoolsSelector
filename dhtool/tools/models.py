@@ -6,11 +6,14 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
 
 # Create your models here.
-class Project(models.Model):
+class Inquiry(models.Model):
 #	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=100, default="", blank=True, null=True)
 	def __str__(self):
 		return self.name
+	class Meta:
+                verbose_name_plural = "inquiries"
+
 class MappingTools(models.Model):
 	software_name = models.CharField(max_length = 256, blank=True, null = True)
 	software_link = models.URLField(max_length = 256, blank=True, null = True)
@@ -28,11 +31,20 @@ class MappingTools(models.Model):
 	class Meta:
 		verbose_name_plural = "mapping tools"
 
+class Page(models.Model):
+	page_title = models.CharField(max_length=50)
+	page_number = models.IntegerField(default=1)
+    	off_ramp_text = models.CharField(max_length=200)
+    	inquiry = models.ForeignKey(Inquiry)
+    	def __str__(self):
+        	return self.page_title
+
 class UserStories(MPTTModel):
 #	id = models.AutoField(primary_key=True)
 #	title = models.CharField(max_length=50, unique=True)
 	story_text = models.CharField(max_length=200)
-	project = models.ForeignKey(Project)
+	inquiry = models.ForeignKey(Inquiry)
+	page = models.ForeignKey(Page,default=1)
 	recommendation = models.ForeignKey(MappingTools)
 	recommendation = models.ManyToManyField(MappingTools, null=True, blank=True)
 	parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
