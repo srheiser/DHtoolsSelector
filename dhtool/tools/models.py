@@ -27,7 +27,7 @@ class MappingTools(models.Model):
 	notes = models.CharField(max_length = 256, blank=True, null = True)
 #	parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
 	def __str__(self):
-		return self.software_name	
+		return self.software_name
 	class Meta:
 		verbose_name_plural = "mapping tools"
 
@@ -44,6 +44,7 @@ class UserStories(MPTTModel):
 #	title = models.CharField(max_length=50, unique=True)
 	story_text = models.CharField(max_length=200)
 	inquiry = models.ForeignKey(Inquiry)
+	tool_tip = models.CharField(max_length=200, null=True, blank=True)
 	page = models.ForeignKey(Page,default=1)
 	recommendation = models.ForeignKey(MappingTools)
 	recommendation = models.ManyToManyField(MappingTools, null=True, blank=True)
